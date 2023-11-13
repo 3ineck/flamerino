@@ -31,10 +31,17 @@ module.exports = {
   callback: async (client, interaction) => {
     const tipoRetainer = interaction.options.get("tipo-retainer").value;
 
+    //https://xivapi.com/search?filters=ID=38933 - API do FF
+
     //Universalis Market API
     //Códigos referente aos itens que contém na array abaixo do código
     const codigosItens = "38933,37821,37819";
     const arrayNomesItens = ["Mornveil Tree Bark", "Bayberry", "Haritaki"];
+    const arrayIcon = [
+      "/i/022000/022418.png",
+      "/i/025000/025015.png",
+      "/i/025000/025017.png",
+    ];
     const arrayCodigosItens = codigosItens.split(",");
 
     //Adiciona o código no final da API do Universalis
@@ -55,9 +62,12 @@ module.exports = {
       if (responseJson.items[arrayCodigosItens[i]].listings.length >= 3) {
         //Faz a média de preço dos últimos 3 itens listados a venda
         const mediaPrecoUnidade =
-          (responseJson.items[arrayCodigosItens[i]].listings[0].pricePerUnit +
-            responseJson.items[arrayCodigosItens[i]].listings[1].pricePerUnit +
-            responseJson.items[arrayCodigosItens[i]].listings[2].pricePerUnit) /
+          (responseJson.items[arrayCodigosItens[i]].recentHistory[0]
+            .pricePerUnit +
+            responseJson.items[arrayCodigosItens[i]].recentHistory[1]
+              .pricePerUnit +
+            responseJson.items[arrayCodigosItens[i]].recentHistory[2]
+              .pricePerUnit) /
           3;
 
         //Empuurar a média para a array arrayMediaPrecoUnitario
@@ -66,9 +76,15 @@ module.exports = {
         //Criação do Embed
         const item = new EmbedBuilder()
           .setTitle(arrayNomesItens[i])
-          .setDescription("A média é " + arrayMediaPrecoUnitario[i])
+          .setURL("https://universalis.app/market/" + arrayCodigosItens[i])
+          .setThumbnail("https://xivapi.com" + arrayIcon[i])
+          .setDescription(
+            "A média do preço unitário das 3 últimas vendas é **" +
+              arrayMediaPrecoUnitario[i] +
+              " gil.**"
+          )
           .addFields({
-            name: ":dollar: **Itens à venda (taxa da cidade inclusa no valor): **",
+            name: ":fire: **ITENS À VENDA: **",
             value: " ",
           })
           .addFields({
@@ -111,7 +127,7 @@ module.exports = {
               responseJson.items[arrayCodigosItens[i]].listings[2].retainerName,
           })
           .addFields({
-            name: ":dollar: **Itens vendidos: **",
+            name: ":fire: **ITENS VENDIDOS: **",
             value: " ",
           })
           .addFields({
@@ -158,8 +174,11 @@ module.exports = {
               " - **Comprado por: **" +
               responseJson.items[arrayCodigosItens[i]].recentHistory[2]
                 .buyerName,
+          })
+          .addFields({
+            name: " ",
+            value: " *Os valors dessa tabela tem a taxa da cidade inclusa. ",
           });
-
         //Criado um object para vincular a média com o embed referente ao item.
         //Essa média será utilizada como o objetivo de colocar a array em ordem decrescente da média
         let objectMediaComEmbed = {
@@ -182,27 +201,36 @@ module.exports = {
 
     //Criar os botões
 
-    //Botão de próximo
-    const buttonNext = new ButtonBuilder()
-      .setCustomId("Próxima")
-      .setLabel("Próxima")
-      .setStyle(ButtonStyle.Primary);
-
     //Botão de anterior
     const buttonPrevious = new ButtonBuilder()
       .setCustomId("Anterior")
       .setLabel("Anterior")
       .setStyle(ButtonStyle.Primary);
 
+    //Botão de páginas
+    const buttonPages = new ButtonBuilder()
+      .setCustomId("Página")
+      .setLabel("1/" + arrayEmbedItem.length)
+      .setStyle(ButtonStyle.Primary)
+      .setDisabled(true);
+
+    //Botão de próximo
+    const buttonNext = new ButtonBuilder()
+      .setCustomId("Próxima")
+      .setLabel("Próxima")
+      .setStyle(ButtonStyle.Primary);
+
     // Criar a linha de botões
     const row = new ActionRowBuilder().addComponents(
       buttonPrevious,
+      buttonPages,
       buttonNext
     );
 
     //Bot envia a mensagem
     const reply = await interaction.reply({
-      content: "TEsteteteetetete",
+      content:
+        "Foi feita a média dos preços unitários das últimas vendas de cada item. Com isso, foram organizados os itens de forma decrescente do valor da média.",
       embeds: [arrayEmbedItem[0]],
       components: [row],
       fetchReply: true,
@@ -226,16 +254,32 @@ module.exports = {
           //Verifica se chegou no último embed. Se for clicado Próxima novamente, volta para o primeiro
           if (client.buttonPosition === arrayEmbedItem.length - 1) {
             client.buttonPosition = 0;
-            reply.edit({ embeds: [arrayEmbedItem[client.buttonPosition]] });
+
+            //Atualiza o botão do meio com a página correta
+            row.components[1].setLabel(
+              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
+            );
+
+            reply.edit({
+              embeds: [arrayEmbedItem[client.buttonPosition]],
+              components: [row],
+            });
           } else {
             //Adiciona 1 toda vez que o botão é clicado
             client.buttonPosition = client.buttonPosition + 1;
 
+            //Atualiza o botão do meio com a página correta
+            row.components[1].setLabel(
+              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
+            );
+
             //Altera para o próximo embed
-            reply.edit({ embeds: [arrayEmbedItem[client.buttonPosition]] });
+            reply.edit({
+              embeds: [arrayEmbedItem[client.buttonPosition]],
+              components: [row],
+            });
           }
 
-          //console.log(client.buttonPosition);
           //Atualiza o botão
           i.deferUpdate();
         }
@@ -245,16 +289,32 @@ module.exports = {
           //Verificar se está no primeiro embed, se sim e for clicado no botão Anterior, vai para o último embed
           if (client.buttonPosition === 0) {
             client.buttonPosition = arrayEmbedItem.length - 1;
-            reply.edit({ embeds: [arrayEmbedItem[arrayEmbedItem.length - 1]] });
+
+            //Atualiza o botão do meio com a página correta
+            row.components[1].setLabel(
+              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
+            );
+
+            reply.edit({
+              embeds: [arrayEmbedItem[arrayEmbedItem.length - 1]],
+              components: [row],
+            });
           } else {
             //Subtrai 1 toda vez que o botão é clicado
             client.buttonPosition = client.buttonPosition - 1;
 
+            //Atualiza o botão do meio com a página correta
+            row.components[1].setLabel(
+              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
+            );
+
             //Altera para o embed anterior
-            reply.edit({ embeds: [arrayEmbedItem[client.buttonPosition]] });
+            reply.edit({
+              embeds: [arrayEmbedItem[client.buttonPosition]],
+              components: [row],
+            });
           }
 
-          //console.log(client.buttonPosition);
           //Atualiza o botão
           i.deferUpdate();
         }
