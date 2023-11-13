@@ -6,6 +6,7 @@ const {
   ButtonStyle,
   ComponentType,
 } = require("discord.js");
+const retainerMarket = require("../../utils/retainerMarket");
 
 module.exports = {
   name: "retainer",
@@ -31,309 +32,142 @@ module.exports = {
   callback: async (client, interaction) => {
     const tipoRetainer = interaction.options.get("tipo-retainer").value;
 
-    //https://xivapi.com/search?filters=ID=38933 - API do FF
+    if (tipoRetainer == "botanist") {
+      //Universalis Market API
+      //Códigos referente aos itens que contém na array abaixo do código
+      const codigosBotanist =
+        "38933,37821,37819,37818,37278,36217,36207,36195,36214,36097,36206,36194,36095,36094,36096,36089,36205,36193,36090,36204,36192,36093,36092,36091,36191,36086,36085,36087,36098,36202,36190,36083,36088";
+      const arrayNomesBotanist = [
+        "Mornveil Tree Bark",
+        "Bayberry",
+        "Haritaki",
+        "Paldao Log",
+        "Thavnairian Corn",
+        "Double-edged Herb",
+        "Golden Cocoon",
+        "Mempisang Log",
+        "Potent Spice",
+        "Alien Onion",
+        "AR-Caean Cotton Boll",
+        "Integral Log",
+        "Elder Nutmeg Seeds",
+        "Sideritis Leaves",
+        "Sykon,Giant Popoto",
+        "Scarlet Moko Grass",
+        "Ironwood Log",
+        "Carrot of Happiness",
+        "Snow Flax",
+        "Red Pine Log",
+        "Beet",
+        "Eblan Lentils",
+        "Cucumber",
+        "Palm Log",
+        "Palm Syrup",
+        "Thavnairian Perilla Leaf",
+        "Coconut",
+        "Thavnairian Paprika",
+        "Dark Hemp",
+        "Horse Chestnut Log",
+        "Dark Rye",
+        "Iceberg Lettuce",
+      ];
+      const arrayIconBotanist = [
+        "/i/022000/022418.png",
+        "/i/025000/025015.png",
+        "/i/025000/025017.png",
+        "/i/022000/022414.png",
+        "/i/025000/025352.png",
+        "/i/025000/025201.png",
+        "/i/021000/021682.png",
+        "/i/022000/022405.png",
+        "/i/025000/025024.png",
+        "/i/025000/025203.png",
+        "/i/025000/025032.png",
+        "/i/022000/022413.png",
+        "/i/025000/025021.png",
+        "/i/025000/025020.png",
+        "/i/025000/025318.png",
+        "/i/025000/025221.png",
+        "/i/021000/021681.png",
+        "/i/022000/022411.png",
+        "/i/025000/025207.png",
+        "/i/021000/021651.png",
+        "/i/022000/022403.png",
+        "/i/025000/025231.png",
+        "/i/025000/025355.png",
+        "/i/025000/025212.png",
+        "/i/022000/022410.png",
+        "/i/022000/022642.png",
+        "/i/025000/025036.png",
+        "/i/025000/025323.png",
+        "/i/025000/025018.png",
+        "/i/021000/021673.png",
+        "/i/022000/022401.png",
+        "/i/025000/025359.png",
+        "/i/025000/025219.png",
+      ];
 
-    //Universalis Market API
-    //Códigos referente aos itens que contém na array abaixo do código
-    const codigosItens = "38933,37821,37819";
-    const arrayNomesItens = ["Mornveil Tree Bark", "Bayberry", "Haritaki"];
-    const arrayIcon = [
-      "/i/022000/022418.png",
-      "/i/025000/025015.png",
-      "/i/025000/025017.png",
-    ];
-    const arrayCodigosItens = codigosItens.split(",");
-
-    //Adiciona o código no final da API do Universalis
-    let urlCodigo = "https://universalis.app/api/v2/Behemoth/" + codigosItens;
-
-    //Coleta a resposta e transforma em JSON
-    const response = await fetch(urlCodigo);
-    const responseJson = await response.json();
-
-    //Criação de uma array vazia para colocar todas as mensagens embeds
-    const arrayEmbedItem = [];
-    const arrayMediaPrecoUnitario = [];
-    const arrayMediaComEmbeds = [];
-
-    //Criar um loop de criação de embeds basiada nos itens da array arrayNomesItens
-    for (let i = 0; i < arrayNomesItens.length; i++) {
-      //Verifica se tem pelo menos 3 itens vendidos no Market Board
-      if (responseJson.items[arrayCodigosItens[i]].listings.length >= 3) {
-        //Faz a média de preço dos últimos 3 itens listados a venda
-        const mediaPrecoUnidade =
-          (responseJson.items[arrayCodigosItens[i]].recentHistory[0]
-            .pricePerUnit +
-            responseJson.items[arrayCodigosItens[i]].recentHistory[1]
-              .pricePerUnit +
-            responseJson.items[arrayCodigosItens[i]].recentHistory[2]
-              .pricePerUnit) /
-          3;
-
-        //Empuurar a média para a array arrayMediaPrecoUnitario
-        arrayMediaPrecoUnitario.push(Math.round(mediaPrecoUnidade));
-
-        //Criação do Embed
-        const item = new EmbedBuilder()
-          .setTitle(arrayNomesItens[i])
-          .setURL("https://universalis.app/market/" + arrayCodigosItens[i])
-          .setThumbnail("https://xivapi.com" + arrayIcon[i])
-          .setDescription(
-            "A média do preço unitário das 3 últimas vendas é **" +
-              arrayMediaPrecoUnitario[i] +
-              " gil.**"
-          )
-          .addFields({
-            name: ":fire: **ITENS À VENDA: **",
-            value: " ",
-          })
-          .addFields({
-            name: " ",
-            value:
-              "**Quantidade: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[0].quantity +
-              " - **Valor unitário: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[0]
-                .pricePerUnit +
-              " - **Total: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[0].total +
-              " - **Vendido por: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[0].retainerName,
-          })
-          .addFields({
-            name: " ",
-            value:
-              "**Quantidade: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[1].quantity +
-              " - **Valor unitário: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[1]
-                .pricePerUnit +
-              " - **Total: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[1].total +
-              " - **Vendido por: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[1].retainerName,
-          })
-          .addFields({
-            name: " ",
-            value:
-              "**Quantidade: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[2].quantity +
-              " - **Valor unitário: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[2]
-                .pricePerUnit +
-              " - **Total: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[2].total +
-              " - **Vendido por: **" +
-              responseJson.items[arrayCodigosItens[i]].listings[2].retainerName,
-          })
-          .addFields({
-            name: ":fire: **ITENS VENDIDOS: **",
-            value: " ",
-          })
-          .addFields({
-            name: " ",
-            value:
-              "**Quantidade: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[0]
-                .quantity +
-              " - **Valor unitário: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[0]
-                .pricePerUnit +
-              " - **Total: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[0].total +
-              " - **Comprado por: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[0]
-                .buyerName,
-          })
-          .addFields({
-            name: " ",
-            value:
-              "**Quantidade: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[1]
-                .quantity +
-              " - **Valor unitário: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[1]
-                .pricePerUnit +
-              " - **Total: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[1].total +
-              " - **Comprado por: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[1]
-                .buyerName,
-          })
-          .addFields({
-            name: " ",
-            value:
-              "**Quantidade: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[2]
-                .quantity +
-              " - **Valor unitário: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[2]
-                .pricePerUnit +
-              " - **Total: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[2].total +
-              " - **Comprado por: **" +
-              responseJson.items[arrayCodigosItens[i]].recentHistory[2]
-                .buyerName,
-          })
-          .addFields({
-            name: " ",
-            value: " *Os valors dessa tabela tem a taxa da cidade inclusa. ",
-          });
-        //Criado um object para vincular a média com o embed referente ao item.
-        //Essa média será utilizada como o objetivo de colocar a array em ordem decrescente da média
-        let objectMediaComEmbed = {
-          media: arrayMediaPrecoUnitario[i],
-          embed: item,
-        };
-
-        //Empurrar para a array arrayMediaComEmbeds para depois colocar a ordem certa
-        arrayMediaComEmbeds.push(objectMediaComEmbed);
-      }
+      retainerMarket(
+        client,
+        interaction,
+        codigosBotanist,
+        arrayNomesBotanist,
+        arrayIconBotanist
+      );
     }
 
-    //Colocar a ordem decrescente pela média
-    arrayMediaComEmbeds.sort((a, b) => b.media - a.media);
+    if (tipoRetainer == "miner") {
+      const codigosMiner = "38933,37821,37819";
+      const arrayNomesMiner = ["Mornveil Tree Bark", "Bayberry", "Haritaki"];
+      const arrayIconMiner = [
+        "/i/022000/022418.png",
+        "/i/025000/025015.png",
+        "/i/025000/025017.png",
+      ];
 
-    //Como o comando reply do discord só aceita uma array com os EmbedBuilder, foi feito um for para criar uma nova array, tirando as médias.
-    for (let i = 0; i < arrayMediaComEmbeds.length; i++) {
-      arrayEmbedItem.push(arrayMediaComEmbeds[i].embed);
+      retainerMarket(
+        client,
+        interaction,
+        codigosMiner,
+        arrayNomesMiner,
+        arrayIconMiner
+      );
     }
 
-    //Criar os botões
+    if (tipoRetainer == "fisher") {
+      const codigosMiner = "38933,37821,37819";
+      const arrayNomesMiner = ["Mornveil Tree Bark", "Bayberry", "Haritaki"];
+      const arrayIconMiner = [
+        "/i/022000/022418.png",
+        "/i/025000/025015.png",
+        "/i/025000/025017.png",
+      ];
 
-    //Botão de anterior
-    const buttonPrevious = new ButtonBuilder()
-      .setCustomId("Anterior")
-      .setLabel("Anterior")
-      .setStyle(ButtonStyle.Primary);
+      retainerMarket(
+        client,
+        interaction,
+        codigosMiner,
+        arrayNomesMiner,
+        arrayIconMiner
+      );
+    }
 
-    //Botão de páginas
-    const buttonPages = new ButtonBuilder()
-      .setCustomId("Página")
-      .setLabel("1/" + arrayEmbedItem.length)
-      .setStyle(ButtonStyle.Primary)
-      .setDisabled(true);
+    if (tipoRetainer == "batalha") {
+      const codigosMiner = "38933,37821,37819";
+      const arrayNomesMiner = ["Mornveil Tree Bark", "Bayberry", "Haritaki"];
+      const arrayIconMiner = [
+        "/i/022000/022418.png",
+        "/i/025000/025015.png",
+        "/i/025000/025017.png",
+      ];
 
-    //Botão de próximo
-    const buttonNext = new ButtonBuilder()
-      .setCustomId("Próxima")
-      .setLabel("Próxima")
-      .setStyle(ButtonStyle.Primary);
-
-    // Criar a linha de botões
-    const row = new ActionRowBuilder().addComponents(
-      buttonPrevious,
-      buttonPages,
-      buttonNext
-    );
-
-    //Bot envia a mensagem
-    const reply = await interaction.reply({
-      content:
-        "Foi feita a média dos preços unitários das últimas vendas de cada item. Com isso, foram organizados os itens de forma decrescente do valor da média.",
-      embeds: [arrayEmbedItem[0]],
-      components: [row],
-      fetchReply: true,
-    });
-
-    //A partir de agora, o bot espera alguma iteração nos botões
-    const collector = reply.createMessageComponentCollector({
-      componentType: ComponentType.Button,
-      time: 180_000, //Bot ativo por 3 minutos
-    });
-
-    //Seta a propriedade buttonPosition no cliente, para verificar a posição da array de embeds quando clicado nos botões
-    client.buttonPosition = 0;
-
-    //Verifica as interações
-    collector.on("collect", (i) => {
-      //Certifica se a pessoa que solicitou o bot é a mesma que clica nos botões
-      if (i.user.id === interaction.user.id) {
-        //Verificar se foi clicado o botão de Próxima
-        if (i.customId === "Próxima") {
-          //Verifica se chegou no último embed. Se for clicado Próxima novamente, volta para o primeiro
-          if (client.buttonPosition === arrayEmbedItem.length - 1) {
-            client.buttonPosition = 0;
-
-            //Atualiza o botão do meio com a página correta
-            row.components[1].setLabel(
-              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
-            );
-
-            reply.edit({
-              embeds: [arrayEmbedItem[client.buttonPosition]],
-              components: [row],
-            });
-          } else {
-            //Adiciona 1 toda vez que o botão é clicado
-            client.buttonPosition = client.buttonPosition + 1;
-
-            //Atualiza o botão do meio com a página correta
-            row.components[1].setLabel(
-              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
-            );
-
-            //Altera para o próximo embed
-            reply.edit({
-              embeds: [arrayEmbedItem[client.buttonPosition]],
-              components: [row],
-            });
-          }
-
-          //Atualiza o botão
-          i.deferUpdate();
-        }
-
-        //Verificar se foi clicado o botão de Anterior
-        if (i.customId === "Anterior") {
-          //Verificar se está no primeiro embed, se sim e for clicado no botão Anterior, vai para o último embed
-          if (client.buttonPosition === 0) {
-            client.buttonPosition = arrayEmbedItem.length - 1;
-
-            //Atualiza o botão do meio com a página correta
-            row.components[1].setLabel(
-              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
-            );
-
-            reply.edit({
-              embeds: [arrayEmbedItem[arrayEmbedItem.length - 1]],
-              components: [row],
-            });
-          } else {
-            //Subtrai 1 toda vez que o botão é clicado
-            client.buttonPosition = client.buttonPosition - 1;
-
-            //Atualiza o botão do meio com a página correta
-            row.components[1].setLabel(
-              client.buttonPosition + 1 + "/" + arrayEmbedItem.length
-            );
-
-            //Altera para o embed anterior
-            reply.edit({
-              embeds: [arrayEmbedItem[client.buttonPosition]],
-              components: [row],
-            });
-          }
-
-          //Atualiza o botão
-          i.deferUpdate();
-        }
-      } else {
-        //Mensagem de erro
-        i.reply({
-          content: `Esses botões não são para você!`,
-          ephemeral: true,
-        });
-      }
-    });
-
-    //Se passar o tempo de ativação, o bot tira os botões e reseta.
-    collector.on("end", (i) => {
-      reply.reply({
-        content:
-          "O tempo de espera do bot acabou, utilize o comando novamente.",
-      });
-      reply.edit({ components: [] });
-    });
+      retainerMarket(
+        client,
+        interaction,
+        codigosMiner,
+        arrayNomesMiner,
+        arrayIconMiner
+      );
+    }
   },
 };
