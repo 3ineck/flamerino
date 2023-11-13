@@ -1,5 +1,4 @@
 const {
-  ApplicationCommandOptionType,
   EmbedBuilder,
   ButtonBuilder,
   ActionRowBuilder,
@@ -11,12 +10,17 @@ const epochTimeConverter = require("./epochTimeConverter");
 module.exports = async (
   client,
   interaction,
-  codigosItens,
+  arrayCodigosItens,
   arrayNomesItens,
   arrayIcon
 ) => {
   //https://xivapi.com/search?filters=ID=38933 - API do FF
-  const arrayCodigosItens = codigosItens.split(",");
+  let codigosItens = "";
+
+  //Pega a array com os códigos e transforma em texto com adição de uma vírgula, para ser usado na URL do Universalis API
+  for (let i = 0; i < arrayCodigosItens.length; i++) {
+    codigosItens = codigosItens + arrayCodigosItens[i] + ",";
+  }
 
   //Adiciona o código no final da API do Universalis
   let urlCodigo = "https://universalis.app/api/v2/Behemoth/" + codigosItens;
@@ -191,27 +195,41 @@ module.exports = async (
   //Botão de anterior
   const buttonPrevious = new ButtonBuilder()
     .setCustomId("Anterior")
-    .setLabel("Anterior")
-    .setStyle(ButtonStyle.Primary);
+    .setStyle(ButtonStyle.Secondary)
+    .setEmoji("◀");
 
   //Botão de páginas
   const buttonPages = new ButtonBuilder()
     .setCustomId("Página")
     .setLabel("1/" + arrayEmbedItem.length)
-    .setStyle(ButtonStyle.Primary)
+    .setStyle(ButtonStyle.Secondary)
     .setDisabled(true);
 
   //Botão de próximo
   const buttonNext = new ButtonBuilder()
     .setCustomId("Próxima")
-    .setLabel("Próxima")
-    .setStyle(ButtonStyle.Primary);
+    .setStyle(ButtonStyle.Secondary)
+    .setEmoji("▶");
+
+  //Botão começo
+  const buttonFirst = new ButtonBuilder()
+    .setCustomId("Começo")
+    .setStyle(ButtonStyle.Secondary)
+    .setEmoji("⏮");
+
+  //Botão começo
+  const buttonLast = new ButtonBuilder()
+    .setCustomId("Último")
+    .setStyle(ButtonStyle.Secondary)
+    .setEmoji("⏭");
 
   // Criar a linha de botões
   const row = new ActionRowBuilder().addComponents(
+    buttonFirst,
     buttonPrevious,
     buttonPages,
-    buttonNext
+    buttonNext,
+    buttonLast
   );
 
   //Bot envia a mensagem
@@ -226,7 +244,7 @@ module.exports = async (
   //A partir de agora, o bot espera alguma iteração nos botões
   const collector = reply.createMessageComponentCollector({
     componentType: ComponentType.Button,
-    time: 600_000, //Bot ativo por 3 minutos
+    time: 180_000, //Bot ativo por 3 minutos
   });
 
   //Seta a propriedade buttonPosition no cliente, para verificar a posição da array de embeds quando clicado nos botões
@@ -243,7 +261,7 @@ module.exports = async (
           client.buttonPosition = 0;
 
           //Atualiza o botão do meio com a página correta
-          row.components[1].setLabel(
+          row.components[2].setLabel(
             client.buttonPosition + 1 + "/" + arrayEmbedItem.length
           );
 
@@ -256,7 +274,7 @@ module.exports = async (
           client.buttonPosition = client.buttonPosition + 1;
 
           //Atualiza o botão do meio com a página correta
-          row.components[1].setLabel(
+          row.components[2].setLabel(
             client.buttonPosition + 1 + "/" + arrayEmbedItem.length
           );
 
@@ -278,7 +296,7 @@ module.exports = async (
           client.buttonPosition = arrayEmbedItem.length - 1;
 
           //Atualiza o botão do meio com a página correta
-          row.components[1].setLabel(
+          row.components[2].setLabel(
             client.buttonPosition + 1 + "/" + arrayEmbedItem.length
           );
 
@@ -291,7 +309,7 @@ module.exports = async (
           client.buttonPosition = client.buttonPosition - 1;
 
           //Atualiza o botão do meio com a página correta
-          row.components[1].setLabel(
+          row.components[2].setLabel(
             client.buttonPosition + 1 + "/" + arrayEmbedItem.length
           );
 
@@ -301,6 +319,45 @@ module.exports = async (
             components: [row],
           });
         }
+
+        //Atualiza o botão
+        i.deferUpdate();
+      }
+
+      //Verificar se foi clicado o botão de Começo
+      if (i.customId === "Começo") {
+        //Seta a posição para 0
+        client.buttonPosition = 0;
+
+        //Atualiza o botão do meio com a página correta
+        row.components[2].setLabel(
+          client.buttonPosition + 1 + "/" + arrayEmbedItem.length
+        );
+
+        //Altera para o primeiro embed
+        reply.edit({
+          embeds: [arrayEmbedItem[client.buttonPosition]],
+          components: [row],
+        });
+
+        //Atualiza o botão
+        i.deferUpdate();
+      }
+
+      if (i.customId === "Último") {
+        //Seta a posição para a última posição
+        client.buttonPosition = arrayEmbedItem.length - 1;
+
+        //Atualiza o botão do meio com a página correta
+        row.components[2].setLabel(
+          client.buttonPosition + 1 + "/" + arrayEmbedItem.length
+        );
+
+        //Altera para o último embed
+        reply.edit({
+          embeds: [arrayEmbedItem[client.buttonPosition]],
+          components: [row],
+        });
 
         //Atualiza o botão
         i.deferUpdate();
