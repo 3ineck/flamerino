@@ -8,7 +8,7 @@ module.exports = (epochTime) => {
     (dataConvertida.getDate() < 10 ? "0" : "") +
     dataConvertida.getDate() +
     "/" +
-    ((dataConvertida.getMonth() < 10 ? "0" : "") +
+    ((dataConvertida.getMonth() + 1 < 10 ? "0" : "") +
       (dataConvertida.getMonth() + 1)) +
     "/" +
     dataConvertida.getFullYear() +

@@ -1,10 +1,10 @@
 module.exports = {
   name: "ping",
   description: "Retorna com o ping do bot.",
-  // devOnly: Boolean,
-  // testOnly: Boolean,
+  devOnly: true,
+  //testOnly: false,
   // options: Object[],
-  // deleted: Boolean,
+  deleted: false,
   callback: async (client, interaction) => {
     await interaction.deferReply();
 

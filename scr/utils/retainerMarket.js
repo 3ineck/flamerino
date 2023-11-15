@@ -64,6 +64,12 @@ module.exports = async (
         responseJson.items[arrayCodigosItens[i]].recentHistory[2].timestamp
       )[1];
 
+      console.log(i);
+      console.log(arrayMediaPrecoUnitario);
+      console.log(arrayMediaPrecoUnitario[i]);
+      console.log(arrayMediaPrecoUnitario[22]);
+      console.log(arrayMediaPrecoUnitario[23]);
+
       //Criação do Embed
       const item = new EmbedBuilder()
         .setTitle(arrayNomesItens[i])
@@ -179,6 +185,9 @@ module.exports = async (
 
       //Empurrar para a array arrayMediaComEmbeds para depois colocar a ordem certa
       arrayMediaComEmbeds.push(objectMediaComEmbed);
+    } else {
+      //Para os itens que tem menos de 3 itens a venda, é preciso nonear a média igual a 0, porque senão buga o display no discord, pois esse item não será mostrado
+      arrayMediaPrecoUnitario[i] = 0;
     }
   }
 
