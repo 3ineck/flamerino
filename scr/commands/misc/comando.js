@@ -1,18 +1,9 @@
 const { ApplicationCommandOptionType } = require("discord.js");
-const mongoose = require("mongoose");
-
-//MONGODB Schema para criação/leitura no banco de dados
-const commandSchema = new mongoose.Schema({
-  command: String,
-  message: String,
-});
-
-//Criar um modelo para os comandos
-const Command = new mongoose.model("Command", commandSchema);
+const Command = require("../../utils/schemas/commandSchema");
 
 module.exports = {
   name: "comando",
-  description: "Retorna um comando.",
+  description: "Retorna um comando simples pré-definido.",
   devOnly: false,
   //testOnly: false,
   // options: Object[],
@@ -20,7 +11,8 @@ module.exports = {
   options: [
     {
       name: "nome-comando",
-      description: "Escolhe um comando",
+      description:
+        "Escreva um dos comandos. Para saber quais são todos os comandos: /ajuda.",
       required: true,
       type: ApplicationCommandOptionType.String,
     },
@@ -34,6 +26,7 @@ module.exports = {
       async (foundCommand) => {
         if (!foundCommand) {
           await interaction.reply({
+            //content: "/comando " + comandoEscolhido + " não existe.",
             content: "/comando " + comandoEscolhido + " não existe.",
           });
         } else {

@@ -7,7 +7,8 @@ const itensBatalha = require("../../documents/itensBatalha.json");
 
 module.exports = {
   name: "retainer",
-  description: "Retorna com a lista de itens mais vantajosos para vender.",
+  description:
+    "Retorna com a lista de itens mais vantajosos para o seu retainer vender.",
   devOnly: false,
   //testOnly: false,
   // options: Object[],

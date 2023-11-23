@@ -64,14 +64,9 @@ module.exports = async (
         responseJson.items[arrayCodigosItens[i]].recentHistory[2].timestamp
       )[1];
 
-      console.log(i);
-      console.log(arrayMediaPrecoUnitario);
-      console.log(arrayMediaPrecoUnitario[i]);
-      console.log(arrayMediaPrecoUnitario[22]);
-      console.log(arrayMediaPrecoUnitario[23]);
-
       //Criação do Embed
       const item = new EmbedBuilder()
+        .setColor(0x071952)
         .setTitle(arrayNomesItens[i])
         .setURL("https://universalis.app/market/" + arrayCodigosItens[i])
         .setThumbnail("https://xivapi.com" + arrayIcon[i])
