@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
-const Alerta = require("../../utils/schemas/commandReminder");
+const Alerta = require("../../utils/schemas/alertaSchema");
 
 module.exports = {
   name: "alertas",

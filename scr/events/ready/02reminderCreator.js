@@ -1,5 +1,7 @@
 const cron = require("cron");
-const Alerta = require("../../utils/schemas/commandReminder");
+const Alerta = require("../../utils/schemas/alertaSchema");
+const User = require("../../utils/schemas/userSchema");
+const birthdayReminder = require("../../utils/birthdayReminder");
 const {
   EmbedBuilder,
   ButtonBuilder,
@@ -8,16 +10,20 @@ const {
   ComponentType,
 } = require("discord.js");
 
-module.exports = (client) => {
-  //REMINDER SISTEM
-  //First it gets the discord guild
-  let guild = client.guilds.cache.get("1081970118759825530");
+//Definição da Guild e do Canal
+const guildMensagem = "1081970118759825530";
+const chanelMensagem = "1129064314913959988";
 
-  //System looks at DB to all reminders that exist
+module.exports = (client) => {
+  //SISTEMA DE ALERTA
+  //Coleta a guild
+  let guild = client.guilds.cache.get(guildMensagem);
+
+  //Sistema olha no DB todos os alertas salvos
   Alerta.find().then((foundReminder) => {
     if (foundReminder) {
       foundReminder.forEach((reminder) => {
-        //Embeded - Hunt Train
+        //Criação do Embed
         const reminderEmbed = new EmbedBuilder()
           .setColor(0x071952)
           .setTitle(reminder.title)
@@ -42,11 +48,11 @@ module.exports = (client) => {
         // Criar a linha de botões
         let row = new ActionRowBuilder().addComponents(buttonOff);
 
-        //For each reminder it sets the time and the message. This attributes can be changed with de command >alerta
+        //Para todo alerta, é setado um horário e a mensagem.
         let cronReminder = new cron.CronJob(
           "00 " + reminder.minute + " " + reminder.hour + " * * *",
           async function () {
-            let channel = guild.channels.cache.get("1129064314913959988");
+            let channel = guild.channels.cache.get(chanelMensagem);
 
             const reply = await channel.send({
               content: reminder.notify,
@@ -79,9 +85,25 @@ module.exports = (client) => {
             });
           }
         );
-        //Starts the reminder
+        //Starta o alerta
         cronReminder.start();
       });
     }
   });
+
+  User.find().then((foundUsers) => {
+    if (foundUsers) {
+      foundUsers.forEach((foundUser) => {
+        birthdayReminder(
+          client,
+          foundUser.birthday.day,
+          foundUser.birthday.month,
+          foundUser.discord_id
+        );
+      });
+    }
+  });
+  /*
+  
+  */
 };
