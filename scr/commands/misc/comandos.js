@@ -12,7 +12,7 @@ module.exports = {
   deleted: false,
   options: [
     {
-      name: "ajuda",
+      name: "lista",
       description: "Lista de todos os comandos simples.",
       type: ApplicationCommandOptionType.Subcommand,
     },
@@ -73,8 +73,8 @@ module.exports = {
   callback: async (client, interaction) => {
     const subcommandSelecionado = interaction.options.getSubcommand();
 
-    //SUBCOMANDO AJUDA
-    if (subcommandSelecionado == "ajuda") {
+    //SUBCOMANDO LISTA
+    if (subcommandSelecionado == "lista") {
       const arrayComandos = [];
 
       //Procura dentro do banco de dados todos os comandos existentes

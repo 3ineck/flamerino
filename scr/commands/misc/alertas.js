@@ -1,11 +1,5 @@
 const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
-const cron = require("cron");
 const Alerta = require("../../utils/schemas/commandReminder");
-//const cronTeste = require("../../utils/02reminderCreation");
-
-//cronTeste();
-
-let teste2 = [];
 
 module.exports = {
   name: "alertas",

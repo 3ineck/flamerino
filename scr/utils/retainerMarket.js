@@ -377,10 +377,14 @@ module.exports = async (
 
   //Se passar o tempo de ativação, o bot tira os botões e reseta.
   collector.on("end", (i) => {
-    reply.reply({
-      content: "O tempo de espera do bot acabou, utilize o comando novamente.",
-    });
-    reply.edit({ components: [] });
+    const row = new ActionRowBuilder().addComponents(
+      buttonFirst.setDisabled(true),
+      buttonPrevious.setDisabled(true),
+      buttonPages,
+      buttonNext.setDisabled(true),
+      buttonLast.setDisabled(true)
+    );
+    reply.edit({ components: [row] });
   });
 
   return;

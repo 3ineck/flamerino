@@ -14,7 +14,8 @@ module.exports = async (
   titulo,
   descricao,
   fieldNome,
-  fieldValue
+  fieldValue,
+  optionalEmbed
 ) => {
   let arrayEmbeds = [];
 
@@ -31,6 +32,10 @@ module.exports = async (
       });
 
     arrayEmbeds.push(item);
+  }
+
+  if (optionalEmbed) {
+    arrayEmbeds.push(optionalEmbed);
   }
 
   //Criar os botões
@@ -75,12 +80,28 @@ module.exports = async (
     buttonLast
   );
 
-  //Bot envia a mensagem
-  const reply = await interaction.reply({
-    embeds: [arrayEmbeds[0]],
-    components: [row],
-    fetchReply: true,
-  });
+  let reply;
+
+  if (arrayEmbeds.length == 1) {
+    const rowOnePage = new ActionRowBuilder().addComponents(
+      buttonPrevious.setDisabled(true),
+      buttonPages,
+      buttonNext.setDisabled(true)
+    );
+    //Bot envia a mensagem
+    reply = await interaction.reply({
+      embeds: [arrayEmbeds[0]],
+      components: [rowOnePage],
+      fetchReply: true,
+    });
+  } else {
+    //Bot envia a mensagem
+    reply = await interaction.reply({
+      embeds: [arrayEmbeds[0]],
+      components: [row],
+      fetchReply: true,
+    });
+  }
 
   //A partir de agora, o bot espera alguma iteração nos botões
   const collector = reply.createMessageComponentCollector({
@@ -214,10 +235,14 @@ module.exports = async (
 
   //Se passar o tempo de ativação, o bot tira os botões e reseta.
   collector.on("end", (i) => {
-    reply.reply({
-      content: "O tempo de espera do bot acabou, utilize o comando novamente.",
-    });
-    reply.edit({ components: [] });
+    const row = new ActionRowBuilder().addComponents(
+      buttonFirst.setDisabled(true),
+      buttonPrevious.setDisabled(true),
+      buttonPages,
+      buttonNext.setDisabled(true),
+      buttonLast.setDisabled(true)
+    );
+    reply.edit({ components: [row] });
   });
 
   return;
