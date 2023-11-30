@@ -2,6 +2,8 @@ const { ApplicationCommandOptionType } = require("discord.js");
 const Command = require("../../utils/schemas/commandSchema");
 const embedCreator = require("../../utils/embedCreator");
 
+const cargoAdm = "1118705764459094037";
+
 module.exports = {
   name: "comandos",
   description:
@@ -127,79 +129,101 @@ module.exports = {
 
       //SUBCOMANDO CRIAR
     } else if (subcommandSelecionado == "criar") {
-      //Salva em uma variável o comando que o usuário digitou
-      let nomeComando = interaction.options.get("nome-comando").value;
-      let mensagemComando = interaction.options.get("texto-comando").value;
+      //Verifica se é alguém do cargo First Flame que está usando o comando
+      if (interaction.member._roles.includes(cargoAdm) == true) {
+        //Salva em uma variável o comando que o usuário digitou
+        let nomeComando = interaction.options.get("nome-comando").value;
+        let mensagemComando = interaction.options.get("texto-comando").value;
 
-      //Deixar tudo minúsculo
-      nomeComando = nomeComando.toLowerCase();
+        //Deixar tudo minúsculo
+        nomeComando = nomeComando.toLowerCase();
 
-      Command.findOne({ command: nomeComando }).then((foundCommand) => {
-        if (!foundCommand) {
-          //Salvar um novo comando
-          const command = new Command({
-            command: nomeComando,
-            message: mensagemComando,
-          });
+        Command.findOne({ command: nomeComando }).then((foundCommand) => {
+          if (!foundCommand) {
+            //Salvar um novo comando
+            const command = new Command({
+              command: nomeComando,
+              message: mensagemComando,
+            });
 
-          command.save();
+            command.save();
 
-          //Mensagem do bot
-          interaction.reply({
-            content: "/comando " + nomeComando + " foi criado.",
-          });
-        } else {
-          interaction.reply({
-            content: "/comando " + nomeComando + " já existe.",
-          });
-        }
-      });
-
+            //Mensagem do bot
+            interaction.reply({
+              content: "/comando " + nomeComando + " foi criado.",
+            });
+          } else {
+            interaction.reply({
+              content: "/comando " + nomeComando + " já existe.",
+            });
+          }
+        });
+      } else {
+        interaction.reply({
+          content: "Apenas First Flame pode executar esse comando.",
+          ephemeral: true,
+        });
+      }
       //SUBCOMANDO EDITAR
     } else if (subcommandSelecionado == "editar") {
-      let nomeComando = interaction.options.get("nome-comando").value;
-      let mensagemComando = interaction.options.get("texto-comando").value;
+      //Verifica se é alguém do cargo First Flame que está usando o comando
+      if (interaction.member._roles.includes(cargoAdm) == true) {
+        let nomeComando = interaction.options.get("nome-comando").value;
+        let mensagemComando = interaction.options.get("texto-comando").value;
 
-      //Deixar tudo minúsculo
-      nomeComando = nomeComando.toLowerCase();
+        //Deixar tudo minúsculo
+        nomeComando = nomeComando.toLowerCase();
 
-      //Procurar pelo nome do comando e alterar a mensagem
-      Command.findOneAndUpdate(
-        { command: nomeComando },
-        { message: mensagemComando }
-      ).then((updatedRecord) => {
-        //Mensagem do bot
-        if (updatedRecord) {
-          interaction.reply({
-            content: "/comando " + nomeComando + " foi editado.",
-          });
-        } else {
-          interaction.reply({
-            content: "/comando " + nomeComando + " não existe.",
-          });
-        }
-      });
-
+        //Procurar pelo nome do comando e alterar a mensagem
+        Command.findOneAndUpdate(
+          { command: nomeComando },
+          { message: mensagemComando }
+        ).then((updatedRecord) => {
+          //Mensagem do bot
+          if (updatedRecord) {
+            interaction.reply({
+              content: "/comando " + nomeComando + " foi editado.",
+            });
+          } else {
+            interaction.reply({
+              content: "/comando " + nomeComando + " não existe.",
+            });
+          }
+        });
+      } else {
+        interaction.reply({
+          content: "Apenas First Flame pode executar esse comando.",
+          ephemeral: true,
+        });
+      }
       //SUBCOMANDO EXCLUIR
     } else if (subcommandSelecionado == "excluir") {
-      let nomeComando = interaction.options.get("nome-comando").value;
+      //Verifica se é alguém do cargo First Flame que está usando o comando
+      if (interaction.member._roles.includes(cargoAdm) == true) {
+        let nomeComando = interaction.options.get("nome-comando").value;
 
-      //Deixar tudo minúsculo
-      nomeComando = nomeComando.toLowerCase();
+        //Deixar tudo minúsculo
+        nomeComando = nomeComando.toLowerCase();
 
-      //Procurar pelo nome do comando e alterar a mensagem
-      Command.deleteOne({ command: nomeComando }).then((removedRecord) => {
-        //Mensagem do bot
-        if (removedRecord) {
-          interaction.reply({
-            content: "/comando " + nomeComando + " foi excluído.",
-          });
-        } else {
-          interaction.reply({
-            content: "/comando " + nomeComando + " foi não existe.",
-          });
-        }
-      });
+        //Procurar pelo nome do comando e alterar a mensagem
+        Command.deleteOne({ command: nomeComando }).then((removedRecord) => {
+          //Mensagem do bot
+          if (removedRecord) {
+            interaction.reply({
+              content: "/comando " + nomeComando + " foi excluído.",
+            });
+          } else {
+            interaction.reply({
+              content: "/comando " + nomeComando + " foi não existe.",
+            });
+          }
+        });
+      } else {
+        interaction.reply({
+          content: "Apenas First Flame pode executar esse comando.",
+          ephemeral: true,
+        });
+      }
     }
   },
 };

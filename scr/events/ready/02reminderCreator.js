@@ -11,8 +11,8 @@ const {
 } = require("discord.js");
 
 //Definição da Guild e do Canal
-const guildMensagem = "1081970118759825530";
-const chanelMensagem = "1129064314913959988";
+const guildMensagem = "1118703188879622286";
+const chanelMensagem = "1118713163144237098";
 
 module.exports = (client) => {
   //SISTEMA DE ALERTA
@@ -73,7 +73,7 @@ module.exports = (client) => {
                 embeds: [
                   reminderEmbed
                     .setDescription(
-                      reminder.success + " Feito por <@" + i.user.id + ">."
+                      reminder.success + " Ativado por <@" + i.user.id + ">."
                     )
                     .setTimestamp(new Date()),
                 ],

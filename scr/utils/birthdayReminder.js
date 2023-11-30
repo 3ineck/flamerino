@@ -21,8 +21,8 @@ const horaMensagem = 16;
 const minutoMensagem = 16;
 
 //Definição da Guild e do Canal
-const guildMensagem = "1081970118759825530";
-const chanelMensagem = "1129064314913959988";
+const guildMensagem = "1118703188879622286";
+const chanelMensagem = "1118736108260442122";
 
 //Coleta um número aletarório
 function randomIntFromInterval(min, max) {

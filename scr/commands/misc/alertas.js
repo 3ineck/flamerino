@@ -4,7 +4,7 @@ const Alerta = require("../../utils/schemas/alertaSchema");
 module.exports = {
   name: "alertas",
   description: "Criar, editar, excluir ou visualizar alertas.",
-  devOnly: false,
+  devOnly: true,
   //testOnly: false,
   // options: Object[],
   deleted: false,
