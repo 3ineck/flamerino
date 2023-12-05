@@ -1,1 +1,1 @@
-start: node ../src/index.js
+start: node scr\index.js
