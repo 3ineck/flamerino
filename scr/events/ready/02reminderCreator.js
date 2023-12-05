@@ -49,8 +49,9 @@ module.exports = (client) => {
         let row = new ActionRowBuilder().addComponents(buttonOff);
 
         //Para todo alerta, é setado um horário e a mensagem.
+        //Necessário adicionar 3 no horário para ajustar o horário de onde o servidor está localizado
         let cronReminder = new cron.CronJob(
-          "00 " + reminder.minute + " " + reminder.hour + " * * *",
+          "00 " + reminder.minute + " " + (reminder.hour + 3) + " * * *",
           async function () {
             let channel = guild.channels.cache.get(chanelMensagem);
 
