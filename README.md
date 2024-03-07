@@ -17,7 +17,7 @@ First, the bot sends a message and a button, then when the person or group that 
 
 ![Reminder 1](https://media.discordapp.net/attachments/1118718563017048085/1179851029009924106/reminder_1.png?ex=65f34165&is=65e0cc65&hm=f7b9d2efa2a95ccdef53678945e33224bdd178c5ee97206c40b466cbc12440d9&=&format=webp&quality=lossless)
 
-![Reminder 2](https://media.discordapp.net/attachments/1118718563017048085/1179851055773782026/reminder_2.png?ex=657b48ec&is=6568d3ec&hm=21a5d1b29515369f05e86f341c1e412120d5c833b4031bd8a44fbeb241f38645&=&format=webp&quality=lossless)
+![Reminder 2](https://media.discordapp.net/attachments/1118718563017048085/1179851055773782026/reminder_2.png?ex=65f3416c&is=65e0cc6c&hm=89b31619eac759ba3a300bdb3cdc36c64d6a51109c6ca0690339883fbcc1b518&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
@@ -29,19 +29,19 @@ Follows all commands related to reminders:
 
 - **/alertas visualizar** - This command calls all reminders created in the server.
 
-![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179548744816013402/image.png?ex=657a2f5f&is=6567ba5f&hm=9ff40af3731db629fa5b64c3f6c2c5bc6221a9215b377103685addc37962d4d0&=&format=webp&quality=lossless)
+![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179548744816013402/image.png?ex=65fb625f&is=65e8ed5f&hm=795dc4746f3322a4c14894fbefd9c51ca48f225a0bf9711fcce01aa5a2c37f54&=&format=webp&quality=lossless)
 
 - **/alertas criar** - This command creates a new reminder. You can set: title (**titulo**); tag, that is the person or the group that will be tagged by the bot (**tag**); the message the bot will send (**mensagem-inicio**); the message that will be displayed after the button is clicked (**mensagem-fim**); the hour of the reminder (**hora**); the minute of the reminder (**minutos**).
 
-![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179851659678068876/alertas_criar.png?ex=657b497c&is=6568d47c&hm=a97d030aab1537986cb4d762466f3a08b0489dca67ba4e01f33f34e1665f21b5&=&format=webp&quality=lossless)
+![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179851659678068876/alertas_criar.png?ex=65f341fc&is=65e0ccfc&hm=7cccc7c240259a30d5e167eea5b2884d2921375e945c5fb398bd8eaf44f70670&=&format=webp&quality=lossless)
 
 - **/alertas editar** - This command edits a reminder created before. You can select the reminder by title (**titulo**) and change: tag, that is the person or the group that will be tagged by the bot (**tag**); the message the bot will send (**mensagem-inicio**); the message that will be displayed after the button is clicked (**mensagem-fim**); the hour of the reminder (**hora**); the minute of the reminder (**minutos**).
 
-![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179853371797143582/alertas_editar.png?ex=657b4b14&is=6568d614&hm=8f16149aba784ee664b44c2c2b47a329701c03557931bd0efed2d26f60f2d14e&=&format=webp&quality=lossless)
+![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179853371797143582/alertas_editar.png?ex=65f34394&is=65e0ce94&hm=7947ee5d2c469fa4d55045f9ecf0d28e44153e8a42166b1775be9679da13adc3&=&format=webp&quality=lossless)
 
 - **/alertas excluir** - This command deletes a reminder created before. You can delete the reminder by title (**titulo**).
 
-![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179854206262333541/alertas_excluir.png?ex=657b4bdb&is=6568d6db&hm=96318a934bae19f5cff38390111370234058b06528ad7775c9e242f924404256&=&format=webp&quality=lossless)
+![All Reminders](https://media.discordapp.net/attachments/1118718563017048085/1179854206262333541/alertas_excluir.png?ex=65f3445b&is=65e0cf5b&hm=a3165275c4a415395b0f3ff8ee258dae19de8fcf63a41f3adf0bd2f8589131c5&=&format=webp&quality=lossless)
 
 ## 🔥 Simple Commands
 
@@ -49,9 +49,9 @@ Flamerino can respond a pre-determined message from a simple command. This can b
 
 - **/comando** - This calls the command that was created before.
 
-![Reminder 1](https://media.discordapp.net/attachments/1118718563017048085/1179860956348698724/image.png?ex=657b5224&is=6568dd24&hm=0fb79a94f350f7ae4929d751651cadafd1e78caee3c4997d6d070cadc251f8d7&=&format=webp&quality=lossless)
+![Reminder 1](https://media.discordapp.net/attachments/1118718563017048085/1179860956348698724/image.png?ex=65f34aa4&is=65e0d5a4&hm=1129ffa86a23614294615c1fcf03f21c048b2ae3810d5a2e8e5f21a0e91189da&=&format=webp&quality=lossless)
 
-![Reminder 2](https://media.discordapp.net/attachments/1118718563017048085/1179861312088571924/image.png?ex=657b5279&is=6568dd79&hm=ee3204f053fb7c0ee870c5268ce7f34a36f8ebba19923ea4bcd04a9241bb3c85&=&format=webp&quality=lossless)
+![Reminder 2](https://media.discordapp.net/attachments/1118718563017048085/1179861312088571924/image.png?ex=65f34af9&is=65e0d5f9&hm=6b6755a499a94ee3c64db65b7bb2f36fa40c62546a2a88507f4c4e4a5f238318&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
@@ -71,30 +71,30 @@ Follows all commands related to /comandos:
 
 - **/comandos lista** - This command calls all commands created in the server.
 
-![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869027963785247/comandos_lista.png?ex=657b59a9&is=6568e4a9&hm=8a71f488b484c2d6237ffad6afc4e751515be11df3182c174748c386e7cd1364&=&format=webp&quality=lossless&width=485&height=468)
+![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869027963785247/comandos_lista.png?ex=65f35229&is=65e0dd29&hm=b4378d27c6fd6c1d9d07d6a01697e8eba81e9c1907ba061f867bd63127e9a8aa&=&format=webp&quality=lossless&width=490&height=473)
 
 - **/comandos criar** - This command creates a new command. You can set: command name (**nome-comando**) and the message that the bot responds (**texto-comando**).
 
-![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869027716300932/comandos_criar.png?ex=657b59a9&is=6568e4a9&hm=6b8754fc5a528e1458f2deea94e22f9b29f4f5f42707127e4f2a6c28bf8f1c82&=&format=webp&quality=lossless)
+![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869027716300932/comandos_criar.png?ex=65f35229&is=65e0dd29&hm=87cd8d2355331d6f926487308cd9d91c1662a4d3cea553f8f6696c2c00048cad&=&format=webp&quality=lossless)
 
 - **/comandos editar** - This command edits a command created before. You can change the command (**nome-comando**) changing the message that the bot responds (**texto-comando**).
 
-![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869028555161600/comandos_editar.png?ex=657b59a9&is=6568e4a9&hm=3f91591a2c8b3cc6d846c0512e43fa9e4dc1ce8b1fea0af3823b22d281392a82&=&format=webp&quality=lossless)
+![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869028555161600/comandos_editar.png?ex=65f35229&is=65e0dd29&hm=29099e1d1447997ade67f8151a043e9cf4baf93c73b8d3d2c1f9b4871937c2e7&=&format=webp&quality=lossless)
 
 - **/comandos excluir** - This command delets a coomand created before. You can delete the comand by the command name (**nome-comando**).
 
-![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869028337061898/comandos_excluir.png?ex=657b59a9&is=6568e4a9&hm=37a3685d4e4e3f388333c013b90f4076787090f5afd18393e01eb2bd6ec0d0a4&=&format=webp&quality=lossless)
+![All Commands](https://media.discordapp.net/attachments/1118718563017048085/1179869028337061898/comandos_excluir.png?ex=65f35229&is=65e0dd29&hm=80b5dbda8aa313e5a4aee173831904688b70608aea15d3ea93f2efad0be7a0ba&=&format=webp&quality=lossless)
 
 ## 🔥 Birthday System
 
 Flamerino can send a message and a gif to a member that is having birthday. A member can set they birthday calling the command bellow, this will save in the database the member Discord ID, nickname, roles and the birthday.
 This is a opportunity to make others commands in the future using this information stored.
 
-![Birthday](https://media.discordapp.net/attachments/1118718563017048085/1179876980196384889/image.png?ex=657b6111&is=6568ec11&hm=23ece5d0983e28c258336a0510825553f9a07b296afcefe71e9cf1f9be9271dd&=&format=webp&quality=lossless)
+![Birthday](https://media.discordapp.net/attachments/1118718563017048085/1179876980196384889/image.png?ex=65f35991&is=65e0e491&hm=1e38cc3292a21cf3eb000d249961c0703e9d951448de3114701f250e95c73d51&=&format=webp&quality=lossless)
 
 - **/aniversario** - This command saves your birthday. You can set the day (**dia**) and the month (**mes**). The year is optional.
 
-![Birthday set](https://media.discordapp.net/attachments/1118718563017048085/1179877766578053192/birthdayset.png?ex=657b61cc&is=6568eccc&hm=c5debf85689894f6ffa94c1881635be6519d25a64702a1bf918c3645829d7459&=&format=webp&quality=lossless)
+![Birthday set](https://media.discordapp.net/attachments/1118718563017048085/1179877766578053192/birthdayset.png?ex=65f35a4c&is=65e0e54c&hm=902441a21f4c7c775eb4e574f14e2747c3d3381078fd33d6114314571cbce1d4&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
@@ -108,11 +108,11 @@ This command is for Final Fantasy XIV players. Flamerino uses the Universalis AP
 The user select the type of the retainer (botanist, miner, fisher or battle) and then the bot search all items (lvl 80 - 90) that this retainer can sell, calculates the average and puts them in descending order.
 The goal for this command is to help players to know what is the best item to farm with the retainer.
 
-![Retainer](https://media.discordapp.net/attachments/1118718563017048085/1179880942425362572/retainer.png?ex=657b64c1&is=6568efc1&hm=cf3f812890f3b8ff5e694781f3e36da7b2bf1ac591d41c0d279f116104c1bdce&=&format=webp&quality=lossless&width=680&height=503)
+![Retainer](https://media.discordapp.net/attachments/1118718563017048085/1179880942425362572/retainer.png?ex=65f35d41&is=65e0e841&hm=64448ef6a29a10abe65a4f7d716791647c24ba28715455210d63b8e77e1e2d1c&=&format=webp&quality=lossless&width=640&height=473)
 
 - **/retainer** - This calls the price of all lvl 80 - 90 items that the retainer (**tipo-retainer**) can get.
 
-![Retainer](https://media.discordapp.net/attachments/1118718563017048085/1179881239952490656/retaineroptions.png?ex=657b6508&is=6568f008&hm=f462e0351f699f34b926c18a3a461db987e09cc922bfdf9eca0faea5f733f8fd&=&format=webp&quality=lossless)
+![Retainer](https://media.discordapp.net/attachments/1118718563017048085/1179881239952490656/retaineroptions.png?ex=65f35d88&is=65e0e888&hm=ed6e7b78d0c36235f86f7d62e5c12d61fc67d0a48e0a24d2e6b51f10a9a7b109&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
@@ -126,7 +126,7 @@ This command is for Final Fantasy XIV players. Flamerino sends the address of th
 
 - **/house** - This is the command.
 
-![House](https://media.discordapp.net/attachments/1118718563017048085/1179890445954854962/house.png?ex=657b6d9b&is=6568f89b&hm=cc886c1ebb36c92341ec6a4fec5d0d8498ef8348d9e2fb63f733c4a04c3b9c3d&=&format=webp&quality=lossless)
+![House](https://media.discordapp.net/attachments/1118718563017048085/1179890445954854962/house.png?ex=65f3661b&is=65e0f11b&hm=508f78df19753a288404af6a1873f341e115cd1f17cd233910d40a416651b4bd&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
@@ -140,7 +140,7 @@ This command is for Final Fantasy XIV players. Flamerino sends information and t
 
 - **/hunt** - This is the command.
 
-![Hunt](https://media.discordapp.net/attachments/1118718563017048085/1179891652396056587/hunt.png?ex=657b6ebb&is=6568f9bb&hm=97f25e5ef37aebff03bedc4a20459674f55b1cf73902ee758d1643b2e65e00f7&=&format=webp&quality=lossless&width=582&height=503)
+![Hunt](https://media.discordapp.net/attachments/1118718563017048085/1179891652396056587/hunt.png?ex=65f3673b&is=65e0f23b&hm=fed2dcef3f02d2ef048095ad5db9bbf84c51f08664f24ac34305f2237836b9ff&=&format=webp&quality=lossless&width=547&height=473)
 
 This command can be found in the file bellow:
 
@@ -154,7 +154,7 @@ Flamerino sends the ping of the bot. This is good to know if the bot is lagging.
 
 - **/ping** - This is the command.
 
-![Ping](https://media.discordapp.net/attachments/1118718563017048085/1179892492452241418/ping.png?ex=657b6f83&is=6568fa83&hm=460abe4bd79bf8582372c35b6dec4afe8d998b0b8c043c44a83e1d62c2512d69&=&format=webp&quality=lossless)
+![Ping](https://media.discordapp.net/attachments/1118718563017048085/1179892492452241418/ping.png?ex=65f36803&is=65e0f303&hm=c96f02451094a076a9df500b000de0839540d24607679534e5393c54d94c67c0&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
@@ -168,15 +168,15 @@ Flamerino sends the list of all commands and gives the option to show more detai
 
 - **/help** - This is the command.
 
-![Help](https://media.discordapp.net/attachments/1118718563017048085/1179893514033692672/ajuda.png?ex=657b7077&is=6568fb77&hm=471dd94291c37fd3f1e6b64a2fb87a8b3bfc5e066dd99388381913ea4b283c5a&=&format=webp&quality=lossless&width=580&height=503)
+![Help](https://media.discordapp.net/attachments/1118718563017048085/1179893514033692672/ajuda.png?ex=65f368f7&is=65e0f3f7&hm=76eadb2957ffb43a87881f4a32aecbc05a1ee9052ac69dfa1ee4e826b714d81d&=&format=webp&quality=lossless&width=545&height=473)
 
 - **/help** - This command has a option to know more about a specific command (**comando**).
 
-![Help](https://media.discordapp.net/attachments/1118718563017048085/1179893514587340820/ajudamore.png?ex=657b7077&is=6568fb77&hm=64fbf1230603ce73ad53b1dbc555afeefbc324dc3f8d1dab47d050c4647cf080&=&format=webp&quality=lossless)
+![Help](https://media.discordapp.net/attachments/1118718563017048085/1179893514587340820/ajudamore.png?ex=65f368f7&is=65e0f3f7&hm=4a5128bbfe2ef3e7f708e60c28f83d69b6565b552ae3a14f62eb9ad14e0cae69&=&format=webp&quality=lossless)
 
 To be clearer, if we select the command "alertas" this is the response:
 
-![Help](https://media.discordapp.net/attachments/1118718563017048085/1179893514323107981/ajudamore2.png?ex=657b7077&is=6568fb77&hm=ca620c77cd37a024bea551fda0db68ee55d200bcd7abc1b24d2dd47e81951e2d&=&format=webp&quality=lossless)
+![Help](https://media.discordapp.net/attachments/1118718563017048085/1179893514323107981/ajudamore2.png?ex=65f368f7&is=65e0f3f7&hm=3c93937860dafd2007979d79df47c8ed92be2cdcc4d3f4f2df39e8e3ff342291&=&format=webp&quality=lossless&width=581&height=473)
 
 This command can be found in the file bellow:
 
@@ -190,7 +190,7 @@ Flamerino sends information about itself.
 
 - **/sobre** - This is the command.
 
-![About](https://media.discordapp.net/attachments/1118718563017048085/1179894734282567710/about.png?ex=657b719a&is=6568fc9a&hm=9979c9b993a2325b937b0ebde45259f19ad007de630aae8152a8d168f08900d7&=&format=webp&quality=lossless)
+![About](https://media.discordapp.net/attachments/1118718563017048085/1179894734282567710/about.png?ex=65f36a1a&is=65e0f51a&hm=58a0d4cd283392f7794b7235551a536a53313e8cf7d47421b0a94d8db63cb825&=&format=webp&quality=lossless)
 
 This command can be found in the file bellow:
 
