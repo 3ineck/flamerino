@@ -15,7 +15,7 @@ In this section will be listed all the Flamerino features.
 Flamerino can set a reminder to be played every day at a certain time. You can see the example bellow, that is used to remind the community leaders to activate the "buff" to the players every single day.
 First, the bot sends a message and a button, then when the person or group that must be remembered clicks the button, the text changes and the button change color.
 
-![Reminder 1](https://media.discordapp.net/attachments/1118718563017048085/1179851029009924106/reminder_1.png?ex=657b48e5&is=6568d3e5&hm=8303faa35ef6ba9a3f9d9f501487a76ced3dfe74107407030c2fd30673476f14&=&format=webp&quality=lossless)
+![Reminder 1](https://media.discordapp.net/attachments/1118718563017048085/1179851029009924106/reminder_1.png?ex=65f34165&is=65e0cc65&hm=f7b9d2efa2a95ccdef53678945e33224bdd178c5ee97206c40b466cbc12440d9&=&format=webp&quality=lossless)
 
 ![Reminder 2](https://media.discordapp.net/attachments/1118718563017048085/1179851055773782026/reminder_2.png?ex=657b48ec&is=6568d3ec&hm=21a5d1b29515369f05e86f341c1e412120d5c833b4031bd8a44fbeb241f38645&=&format=webp&quality=lossless)
 
